@@ -1,10 +1,50 @@
 /* styles.css */
+
 body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    color: #333;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    height: 75vh;
+    align-items: center;
 }
 
-h1 {
-    color: #007BFF;
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 400px;
+    justify-content: space-between;
+    height: 70%;
+    padding: 40px;
+    background-color: white;
+    border-radius: 2px;
+}
+
+form > * {
+    width: 100%;
+}
+
+input, select, button{
+    height: 40px;
+    border-radius: 2px;
+    border: 3px solid black;
+    width: 100%;
+    padding: 0px 8px;
+    box-sizing: border-box;
+}
+
+button {
+    border: none;
+    background-color: black;
+    color: white;
+    font-size: 16px;
+    border-radius: 16px;
+}
+
+button:hover {
+    background-color: rgb(59, 59, 59);
+}
+
+:invalid {
+    border-color: red;
 }
