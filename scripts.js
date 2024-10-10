@@ -91,19 +91,79 @@ function zipValidator() {
 addGlobalEventListener('change', '#zipInput', zipValidator);
 
 function passwordValidator() {
-    const passwordPattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
+    // const passwordPattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
     passwordValue = passwordInput.value;
+    let passwordReqs = document.querySelectorAll('.passwordRequirements > div');
 
-    function validatePassword(password) {
-        if (passwordPattern.test(password)) {
-            passwordInput.setCustomValidity("")
-        } else if (!passwordPattern.test(password)) {
-            passwordInput.setCustomValidity("Not right")
-        }
-        passwordInput.reportValidity();
+    function validateLowercase(password) {
+        return /[a-z]/.test(password);
     }
 
-    validatePassword(passwordValue);
+    function validateUppercase(password) {
+        return /[A-Z]/.test(password)
+    }
+
+    function validateNumber(password) {
+        return /\d/.test(password);
+    }
+
+    function validateSpecialChar(password) {
+        return /[!@#$%^&*]/.test(password);
+    }
+
+    function validateLength(password) {
+        return password.length >= 12;
+    }
+    if (!validateLowercase(passwordValue)) {
+        passwordReqs[0].classList.add('passNotReqMet');
+        passwordReqs[0].classList.remove('passReqMet');
+    } else if (validateLowercase(passwordValue)) {
+        passwordReqs[0].classList.remove('passNotReqMet');
+        passwordReqs[0].classList.add('passReqMet');
+    }
+
+    if (!validateUppercase(passwordValue)) {
+        passwordReqs[1].classList.add('passNotReqMet');
+        passwordReqs[1].classList.remove('passReqMet');
+    } else if (validateUppercase(passwordValue)) {
+        passwordReqs[1].classList.remove('passNotReqMet');
+        passwordReqs[1].classList.add('passReqMet');
+    }
+
+    if (!validateNumber(passwordValue)) {
+        passwordReqs[2].classList.add('passNotReqMet');
+        passwordReqs[2].classList.remove('passReqMet');
+    } else if (validateNumber(passwordValue)) {
+        passwordReqs[2].classList.remove('passNotReqMet');
+        passwordReqs[2].classList.add('passReqMet');
+    }
+
+    if (!validateSpecialChar(passwordValue)) {
+        passwordReqs[3].classList.add('passNotReqMet');
+        passwordReqs[3].classList.remove('passReqMet');
+    } else if (validateSpecialChar(passwordValue)) {
+        passwordReqs[3].classList.remove('passNotReqMet');
+        passwordReqs[3].classList.add('passReqMet');
+    }
+
+    if (!validateLength(passwordValue)) {
+        passwordReqs[4].classList.add('passNotReqMet');
+        passwordReqs[4].classList.remove('passReqMet');
+    } else if (validateLength(passwordValue)) {
+        passwordReqs[4].classList.remove('passNotReqMet');
+        passwordReqs[4].classList.add('passReqMet');
+    }
+
+    // function validatePassword(password) {
+    //     if (passwordPattern.test(password)) {
+    //         passwordInput.setCustomValidity("")
+    //     } else if (!passwordPattern.test(password)) {
+    //         passwordInput.setCustomValidity("Not right")
+    //     }
+    //     passwordInput.reportValidity();
+    // }
+
+    // validatePassword(passwordValue);
 }
 
 addGlobalEventListener('change', '#passwordInput', passwordValidator);
@@ -116,10 +176,8 @@ function passwordConfValidator() {
     // console.log(passwordValue === passwordConfValue)
     if (passwordValue === passwordConfValue) {
         passwordConfInput.setCustomValidity("")
-        console.log('looks good');
     } else if (passwordValue !== passwordConfValue) {
         passwordConfInput.setCustomValidity("Looks like your password doesn't match")
-        console.log('looks bad');
     }
     passwordConfInput.reportValidity();
 
