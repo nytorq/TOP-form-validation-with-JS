@@ -66,6 +66,8 @@ form.append(formHeader, emailLabel, emailInput, countryLabel, countryInput, zipL
     passwordInput, pwRequirements, pwConfLabel, passwordConfInput, pwConfRequirements, submitButton)
 body.appendChild(form);
 
+
+
 function zipValidator() {
     let countryValue = countryInput.value;
     let zipValue = zipInput.value;
@@ -169,11 +171,10 @@ function passwordValidator() {
 addGlobalEventListener('change', '#passwordInput', passwordValidator);
 
 function passwordConfValidator() {
+
     let passwordValue = passwordInput.value;
     let passwordConfValue = passwordConfInput.value;
-    // console.log(passwordValue)
-    // console.log(passwordConfValue)
-    // console.log(passwordValue === passwordConfValue)
+    let passwordReqs = document.querySelectorAll('.passwordRequirements > div');
     if (passwordValue === passwordConfValue) {
         passwordConfInput.setCustomValidity("")
     } else if (passwordValue !== passwordConfValue) {
@@ -181,11 +182,7 @@ function passwordConfValidator() {
     }
     passwordConfInput.reportValidity();
 
-    // function validatePasswordConf() {
-        
-    // }
-
-    // validatePasswordConf();
+    
 }
 
 addGlobalEventListener('change', '#passwordConfInput', passwordConfValidator);
